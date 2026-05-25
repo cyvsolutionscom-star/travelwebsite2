@@ -102,14 +102,14 @@ CREATE TRIGGER trg_reviews_updated BEFORE UPDATE ON public.reviews FOR EACH ROW 
 INSERT INTO public.site_settings DEFAULT VALUES;
 
 INSERT INTO public.cars (name, image_url, category, type_label, use_label, seats, fuel, transmission, price_per_day, badge, sort_order) VALUES
-('Kia Seltos', '/src/assets/car-seltos.jpg', 'suv', 'Compact SUV', 'Daily & Outstation', '5 Seater', 'Petrol / Diesel', 'Auto / Manual', 2800, 'Premium', 1),
-('Hyundai Venue', '/src/assets/car-venue.jpg', 'suv', 'Sub-Compact SUV', 'City & Weekends', '5 Seater', 'Petrol', 'Manual / Auto', 2200, NULL, 2),
-('Hyundai Creta', '/src/assets/car-creta.jpg', 'suv', 'Compact SUV', 'City & Highway', '5 Seater', 'Petrol / Diesel', 'Automatic', 3000, 'Trending', 3),
-('Swift Dzire', '/src/assets/car-dzire.jpg', 'sedan', 'Compact Sedan', 'Daily & Personal', '5 Seater', 'Petrol', 'Manual / Auto', 1600, 'Budget Friendly', 4),
-('Innova Crysta', '/src/assets/car-innova.jpg', 'mpv', 'Premium MPV', 'Family & Outstation', '7 Seater', 'Diesel', 'Automatic', 3800, 'Family Favorite', 5),
-('Honda City', '/src/assets/car-city.jpg', 'sedan', 'Premium Sedan', 'City & Business', '5 Seater', 'Petrol', 'Automatic', 2600, NULL, 6),
-('Mahindra Thar', '/src/assets/car-thar.jpg', 'suv', '4x4 SUV', 'Adventure & Events', '5 Seater', 'Diesel', 'Manual / Auto', 3500, 'Popular', 7),
-('Maruti Ertiga', '/src/assets/car-ertiga.jpg', 'mpv', 'MPV', 'Family & Group Travel', '7 Seater', 'Petrol / CNG', 'Manual', 1900, 'Best Value', 8);
+('Kia Seltos', '/cars/car-seltos.jpg', 'suv', 'Compact SUV', 'Daily & Outstation', '5 Seater', 'Petrol / Diesel', 'Auto / Manual', 2800, 'Premium', 1),
+('Hyundai Venue', '/cars/car-venue.jpg', 'suv', 'Sub-Compact SUV', 'City & Weekends', '5 Seater', 'Petrol', 'Manual / Auto', 2200, NULL, 2),
+('Hyundai Creta', '/cars/car-creta.jpg', 'suv', 'Compact SUV', 'City & Highway', '5 Seater', 'Petrol / Diesel', 'Automatic', 3000, 'Trending', 3),
+('Swift Dzire', '/cars/car-dzire.jpg', 'sedan', 'Compact Sedan', 'Daily & Personal', '5 Seater', 'Petrol', 'Manual / Auto', 1600, 'Budget Friendly', 4),
+('Innova Crysta', '/cars/car-innova.jpg', 'mpv', 'Premium MPV', 'Family & Outstation', '7 Seater', 'Diesel', 'Automatic', 3800, 'Family Favorite', 5),
+('Honda City', '/cars/car-city.jpg', 'sedan', 'Premium Sedan', 'City & Business', '5 Seater', 'Petrol', 'Automatic', 2600, NULL, 6),
+('Mahindra Thar', '/cars/car-thar.jpg', 'suv', '4x4 SUV', 'Adventure & Events', '5 Seater', 'Diesel', 'Manual / Auto', 3500, 'Popular', 7),
+('Maruti Ertiga', '/cars/car-ertiga.jpg', 'mpv', 'MPV', 'Family & Group Travel', '7 Seater', 'Petrol / CNG', 'Manual', 1900, 'Best Value', 8);
 
 INSERT INTO public.reviews (name, initials, tag, text, sort_order) VALUES
 ('Anil Kumar', 'AN', 'Regular Customer • Monthly Rentals', 'Aim Car Travels has been my go-to for years. Cars are always spotless and pricing is honest. Booking is just a WhatsApp message away.', 1),
