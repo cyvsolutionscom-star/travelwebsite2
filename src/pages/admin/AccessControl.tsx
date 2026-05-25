@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Section, Field } from "./SharedUI";
-import { Shield, Key, Trash2, Loader2, Info, UserPlus, Mail, Eye, EyeOff } from "lucide-react";
+import { Key, Trash2, Loader2, UserPlus, Mail, Eye, EyeOff } from "lucide-react";
 import { toast } from "sonner";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -22,9 +22,7 @@ const AccessControl = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [creating, setCreating] = useState(false);
 
-  // Grant by UUID
-  const [newUuid, setNewUuid] = useState("");
-  const [adding, setAdding] = useState(false);
+
 
   useEffect(() => {
     fetchAdmins();
@@ -104,30 +102,7 @@ const AccessControl = () => {
     }
   };
 
-  // ─── Grant admin by UUID ──────────────────────────────────────────────────
-  const handleAddAdmin = async () => {
-    if (!newUuid.trim()) {
-      toast.error("Please enter a valid User UUID");
-      return;
-    }
-    setAdding(true);
-    try {
-      const { error } = await supabase
-        .from("user_roles")
-        .insert({ user_id: newUuid.trim(), role: "admin" });
-      
-      if (error) throw error;
-      
-      toast.success("Admin access granted successfully!");
-      setNewUuid("");
-      fetchAdmins();
-    } catch (err: any) {
-      console.error(err);
-      toast.error(err.message || "Failed to grant admin access");
-    } finally {
-      setAdding(false);
-    }
-  };
+
 
   // ─── Remove admin ─────────────────────────────────────────────────────────
   const handleRemoveAdmin = async (userId: string) => {
@@ -218,34 +193,6 @@ const AccessControl = () => {
         </div>
       </Section>
 
-      {/* ─── Grant Access by UUID ─────────────────────────────────────────── */}
-      <Section title="Grant Access by UUID" description="If a user has already signed up but is blocked on the 'Access Restricted' screen, enter their UUID here.">
-        <div className="flex gap-4 items-end">
-          <div className="flex-1">
-            <Field 
-              label="User UUID" 
-              value={newUuid} 
-              onChange={setNewUuid} 
-              placeholder="e.g. 123e4567-e89b-12d3-a456-426614174000"
-            />
-          </div>
-          <button 
-            onClick={handleAddAdmin}
-            disabled={adding || !newUuid.trim()}
-            className="h-11 px-6 rounded-xl bg-gradient-primary text-primary-foreground text-sm font-semibold inline-flex items-center justify-center gap-2 btn-glow hover:scale-[1.02] transition-transform disabled:opacity-50 disabled:pointer-events-none mb-[2px]"
-          >
-            {adding ? <Loader2 className="w-4 h-4 animate-spin" /> : <Shield className="w-4 h-4" />}
-            Grant Access
-          </button>
-        </div>
-        
-        <div className="mt-4 p-4 rounded-xl bg-secondary/50 border border-border/50 flex gap-3 text-sm text-muted-foreground leading-relaxed">
-          <Info className="w-5 h-5 text-primary shrink-0" />
-          <p>
-            <strong>How to find a User UUID:</strong> When a non-admin user logs in, they will see an "Access Restricted" screen. That screen displays their unique User UUID. Ask them to copy and send that UUID to you.
-          </p>
-        </div>
-      </Section>
 
       {/* ─── Current Administrators Table ─────────────────────────────────── */}
       <Section title="Current Administrators" description="List of all users with active admin access.">
