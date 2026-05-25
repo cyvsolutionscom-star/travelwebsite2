@@ -1,0 +1,443 @@
+# Car Rental Website – Admin Dashboard & Landing Page CMS Prompt
+
+## Project Goal
+
+Create a complete Admin Dashboard for the existing Car Rental Website built with React + Vite + Tailwind + shadcn/ui.
+
+The admin panel should allow the website owner to edit all landing page content dynamically without changing code.
+
+---
+
+# Main Requirements
+
+## 1. Authentication
+
+Create secure admin authentication.
+
+Features:
+
+- Admin login page
+- Protected admin routes
+- Logout functionality
+- Session persistence
+- Role-based access (optional)
+
+Tech:
+
+- Supabase Auth or JWT authentication
+
+---
+
+# 2. Admin Dashboard Layout
+
+Create a modern responsive admin dashboard.
+
+Sidebar Menu:
+
+- Dashboard
+- Hero Section
+- Services
+- Fleet / Cars
+- Reviews
+- CTA Section
+- Payment Section
+- Navbar Settings
+- Footer Settings
+- SEO Settings
+- Media Library
+- Users
+- Bookings
+- Settings
+
+Topbar:
+
+- Admin profile
+- Notifications
+- Theme toggle
+- Logout button
+
+Design:
+
+- Professional clean UI
+- Dark/light mode
+- Mobile responsive
+- Use shadcn/ui components
+
+---
+
+# 3. Landing Page CMS Editing
+
+The admin must be able to edit every section from dashboard.
+
+## Hero Section Editor
+
+Editable Fields:
+
+- Main heading
+- Sub heading
+- CTA button text
+- CTA button link
+- Hero image upload
+- Background image
+- WhatsApp number
+
+Features:
+
+- Live preview
+- Save changes button
+- Image upload support
+
+---
+
+## Services Section Editor
+
+Admin can:
+
+- Add new service
+- Edit service
+- Delete service
+
+Fields:
+
+- Service title
+- Description
+- Icon
+- Image
+
+---
+
+## Fleet / Cars Management
+
+Admin can manage all cars.
+
+Features:
+
+- Add car
+- Edit car
+- Delete car
+- Upload car image
+- Set featured car
+
+Fields:
+
+- Car name
+- Price
+- Transmission
+- Fuel type
+- Seats
+- Availability
+- Car image
+- Description
+
+Add filters:
+
+- SUV
+- Sedan
+- Luxury
+- Hatchback
+
+---
+
+## Reviews Management
+
+Admin can:
+
+- Add review
+- Edit review
+- Delete review
+
+Fields:
+
+- Customer name
+- Rating
+- Review text
+- Customer image
+- Location
+
+---
+
+## CTA Section Editor
+
+Editable:
+
+- CTA heading
+- CTA text
+- Button text
+- Button URL
+- Background image
+
+---
+
+## Payment Section Editor
+
+Editable:
+
+- Payment methods
+- QR code image
+- UPI ID
+- Bank details
+- Payment instructions
+
+---
+
+## Navbar Management
+
+Editable:
+
+- Logo upload
+- Menu items
+- Contact button
+- Sticky navbar toggle
+
+---
+
+## Footer Management
+
+Editable:
+
+- Company info
+- Address
+- Email
+- Phone number
+- Social media links
+- Copyright text
+
+---
+
+# 4. SEO Management
+
+Admin can edit:
+
+- Meta title
+- Meta description
+- Keywords
+- OpenGraph image
+- Favicon
+
+Add:
+
+- Sitemap support
+- robots.txt support
+
+---
+
+# 5. Media Library
+
+Create centralized media management.
+
+Features:
+
+- Upload images
+- Delete images
+- Preview images
+- Organize folders
+- Reuse uploaded images
+
+Supported:
+
+- JPG
+- PNG
+- WEBP
+- SVG
+
+---
+
+# 6. Booking Management
+
+Create booking management system.
+
+Admin can:
+
+- View bookings
+- Accept booking
+- Reject booking
+- Update booking status
+- Export booking data
+
+Booking Fields:
+
+- Customer name
+- Phone number
+- Pickup location
+- Drop location
+- Date
+- Car selected
+- Payment status
+
+Statuses:
+
+- Pending
+- Confirmed
+- Completed
+- Cancelled
+
+---
+
+# 7. Database Structure
+
+Use Supabase PostgreSQL.
+
+Suggested Tables:
+
+- admins
+- site_settings
+- hero_section
+- services
+- cars
+- reviews
+- bookings
+- payments
+- seo_settings
+- media_library
+
+---
+
+# 8. API & Backend Logic
+
+Create reusable APIs.
+
+Requirements:
+
+- CRUD operations
+- Image upload API
+- Authentication middleware
+- Validation
+- Error handling
+- Loading states
+
+---
+
+# 9. Frontend Requirements
+
+Use:
+
+- React
+- TypeScript
+- Tailwind CSS
+- shadcn/ui
+- React Hook Form
+- Zod validation
+- TanStack Query
+
+Features:
+
+- Toast notifications
+- Form validation
+- Drag & drop uploads
+- Rich text editor
+- Responsive tables
+- Search & filters
+
+---
+
+# 10. Dashboard Analytics
+
+Create analytics cards.
+
+Show:
+
+- Total bookings
+- Revenue
+- Total cars
+- Active users
+- Monthly bookings chart
+
+Add charts using Recharts.
+
+---
+
+# 11. Security
+
+Implement:
+
+- Route protection
+- Input validation
+- Rate limiting
+- Secure image upload
+- XSS protection
+- CSRF protection
+
+---
+
+# 12. Performance Optimization
+
+Requirements:
+
+- Lazy loading
+- Image optimization
+- Pagination
+- Code splitting
+- Skeleton loaders
+
+---
+
+# 13. Suggested Folder Structure
+
+```bash
+src/
+ ├── components/
+ │    ├── admin/
+ │    ├── forms/
+ │    ├── tables/
+ │    └── ui/
+ ├── pages/
+ │    ├── admin/
+ │    └── public/
+ ├── hooks/
+ ├── services/
+ ├── lib/
+ ├── store/
+ ├── types/
+ └── integrations/
+```
+
+---
+
+# 14. Admin Dashboard Pages
+
+Create these pages:
+
+- /admin/login
+- /admin/dashboard
+- /admin/hero
+- /admin/services
+- /admin/fleet
+- /admin/reviews
+- /admin/bookings
+- /admin/payments
+- /admin/media
+- /admin/seo
+- /admin/settings
+
+---
+
+# 15. Extra Features
+
+Optional advanced features:
+
+- WhatsApp booking integration
+- Email notifications
+- SMS alerts
+- Coupon system
+- Multi-language support
+- Blog management
+- AI content generation
+- Activity logs
+
+---
+
+# Final Expected Result
+
+The final system should allow the admin to completely manage the entire car rental website from the dashboard without editing source code.
+
+The website owner should be able to:
+
+- Edit landing page content
+- Upload images
+- Manage bookings
+- Update cars
+- Change SEO settings
+- Control branding
+- Monitor analytics
+
+Everything must be dynamic, responsive, scalable, and production-ready.

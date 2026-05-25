@@ -15,6 +15,8 @@ const BrandingEditor = () => {
       <div className="grid sm:grid-cols-2 gap-4">
         <Field label="Business Name" value={form.business_name} onChange={(v) => set("business_name", v)} />
         <Field label="Tagline" value={form.tagline} onChange={(v) => set("tagline", v)} />
+        <Field label="Admin Portal Name (e.g. Veloce CMS)" value={form.admin_portal_name ?? "Veloce CMS"} onChange={(v) => set("admin_portal_name", v)} />
+        <Field label="Admin Login Title (e.g. Veloce Gateway)" value={form.admin_login_title ?? "Veloce Gateway"} onChange={(v) => set("admin_login_title", v)} />
         <Field label="Hero Eyebrow (small line above title)" value={form.hero_eyebrow} onChange={(v) => set("hero_eyebrow", v)} />
         <Field label="Hero Title" value={form.hero_title} onChange={(v) => set("hero_title", v)} />
         <Field label="Highlight word (must appear inside title)" value={form.hero_highlight} onChange={(v) => set("hero_highlight", v)} />
@@ -23,7 +25,7 @@ const BrandingEditor = () => {
         <Field label="Years in Business" value={form.years_in_business} onChange={(v) => set("years_in_business", v)} />
       </div>
       <Field label="Hero Subtitle" value={form.hero_subtitle} onChange={(v) => set("hero_subtitle", v)} multiline />
-      <SaveButton saving={saving} onClick={() => save(["logo_url","hero_image_url","business_name","tagline","hero_eyebrow","hero_title","hero_highlight","hero_subtitle","rating","reviews_count","years_in_business"])} />
+      <SaveButton saving={saving} onClick={() => save(["logo_url","hero_image_url","business_name","tagline","admin_portal_name","admin_login_title","hero_eyebrow","hero_title","hero_highlight","hero_subtitle","rating","reviews_count","years_in_business"])} />
     </Section>
   );
 };

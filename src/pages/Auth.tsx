@@ -4,7 +4,8 @@ import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
-import { Loader2, ArrowLeft, Shield, Eye, EyeOff, Key, Mail } from "lucide-react";
+import { ArrowLeft, Shield, Eye, EyeOff, Key, Mail } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
 
 const schema = z.object({
   email: z.string().trim().email("Enter a valid email").max(255),
@@ -20,6 +21,14 @@ const Auth = () => {
   
   const navigate = useNavigate();
   const { session, loading: authLoading } = useAuth();
+
+  const { data: settings } = useQuery({
+    queryKey: ["site_settings"],
+    queryFn: async () => {
+      const { data } = await supabase.from("site_settings").select("*").single();
+      return data;
+    },
+  });
 
   useEffect(() => {
     if (!authLoading && session) {
@@ -92,7 +101,7 @@ const Auth = () => {
               <Shield className="w-6 h-6 text-primary-foreground" />
             </div>
             <div>
-              <h1 className="font-display font-black text-2xl tracking-tight text-foreground">Veloce Gateway</h1>
+              <h1 className="font-display font-black text-2xl tracking-tight text-foreground">{settings?.admin_login_title || "Veloce Gateway"}</h1>
               <p className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mt-0.5">Control Center Access</p>
             </div>
           </div>

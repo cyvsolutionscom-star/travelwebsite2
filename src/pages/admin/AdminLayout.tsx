@@ -7,6 +7,7 @@ import {
   Wrench, Car as CarIcon, MessageSquare, CreditCard, MessageCircle, MapPin, Loader2, Menu, X, Shield, User
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { useQuery } from "@tanstack/react-query";
 
 const TABS = [
   { id: "overview", path: "/admin", label: "Overview / Stats", icon: BarChart3, exact: true },
@@ -25,6 +26,14 @@ const AdminLayout = () => {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const { data: settings } = useQuery({
+    queryKey: ["site_settings"],
+    queryFn: async () => {
+      const { data } = await supabase.from("site_settings").select("*").single();
+      return data;
+    },
+  });
+
   // Close mobile menu on route change
   useEffect(() => {
     setMobileMenuOpen(false);
@@ -35,7 +44,7 @@ const AdminLayout = () => {
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="relative flex flex-col items-center gap-4">
           <div className="w-16 h-16 rounded-full border-4 border-primary/20 border-t-primary animate-spin" />
-          <p className="text-sm font-semibold tracking-wider text-muted-foreground animate-pulse">Initializing Veloce CMS...</p>
+          <p className="text-sm font-semibold tracking-wider text-muted-foreground animate-pulse">Initializing {settings?.admin_portal_name || "Veloce CMS"}...</p>
         </div>
       </div>
     );
@@ -86,7 +95,7 @@ const AdminLayout = () => {
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-2xl bg-gradient-primary flex items-center justify-center text-primary-foreground font-display font-extrabold text-lg shadow-glow">V</div>
           <div>
-            <div className="font-display font-bold text-sm leading-tight text-foreground">Veloce CMS</div>
+            <div className="font-display font-bold text-sm leading-tight text-foreground">{settings?.admin_portal_name || "Veloce CMS"}</div>
             <div className="text-[9px] uppercase tracking-widest text-primary font-bold">Admin Console</div>
           </div>
         </div>
@@ -124,7 +133,7 @@ const AdminLayout = () => {
             <div className="flex items-center gap-3 min-w-0">
               <div className="w-11 h-11 rounded-2xl bg-gradient-primary flex items-center justify-center font-display font-extrabold text-primary-foreground text-xl shadow-glow">V</div>
               <div className="min-w-0">
-                <div className="font-display font-bold text-sm leading-tight text-foreground">Veloce CMS</div>
+                <div className="font-display font-bold text-sm leading-tight text-foreground">{settings?.admin_portal_name || "Veloce CMS"}</div>
                 <div className="text-[9px] uppercase tracking-widest text-primary font-bold">Admin Console</div>
               </div>
             </div>
@@ -198,10 +207,12 @@ const AdminLayout = () => {
           
           {/* Dashboard Premium Footer */}
           <footer className="mt-12 py-6 border-t border-border/40 text-center text-xs text-muted-foreground">
+            <div className="flex items-center gap-1.5 justify-center mb-1">
+              <span>{settings?.admin_portal_name || "Veloce CMS"} Console • {settings?.business_name || "Aim Car Travels"}</span>
+            </div>
             <div className="flex items-center justify-center gap-1">
-              <span>Veloce CMS Console • Aim Car Travels</span>
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500" />
               <span>All Systems Nominal</span>
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500" />
             </div>
             <p className="mt-1 opacity-70">Crafted with pixel-precision and responsive engineering</p>
           </footer>

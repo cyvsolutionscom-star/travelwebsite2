@@ -146,6 +146,8 @@ export type Database = {
       site_settings: {
         Row: {
           about_text: string
+          admin_portal_name: string
+          admin_login_title: string
           address: string
           business_name: string
           cta_subtitle: string
@@ -179,6 +181,8 @@ export type Database = {
         }
         Insert: {
           about_text?: string
+          admin_portal_name?: string
+          admin_login_title?: string
           address?: string
           business_name?: string
           cta_subtitle?: string
@@ -212,6 +216,8 @@ export type Database = {
         }
         Update: {
           about_text?: string
+          admin_portal_name?: string
+          admin_login_title?: string
           address?: string
           business_name?: string
           cta_subtitle?: string
