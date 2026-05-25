@@ -14,6 +14,62 @@ export type Database = {
   }
   public: {
     Tables: {
+      bookings: {
+        Row: {
+          id: string
+          customer_name: string
+          phone_number: string
+          pickup_location: string
+          drop_location: string
+          pickup_date: string
+          drop_date: string | null
+          car_id: string | null
+          status: string
+          payment_status: string
+          notes: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          customer_name: string
+          phone_number: string
+          pickup_location: string
+          drop_location: string
+          pickup_date: string
+          drop_date?: string | null
+          car_id?: string | null
+          status?: string
+          payment_status?: string
+          notes?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          customer_name?: string
+          phone_number?: string
+          pickup_location?: string
+          drop_location?: string
+          pickup_date?: string
+          drop_date?: string | null
+          car_id?: string | null
+          status?: string
+          payment_status?: string
+          notes?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_car_id_fkey"
+            columns: ["car_id"]
+            isOneToOne: false
+            referencedRelation: "cars"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       cars: {
         Row: {
           active: boolean
@@ -182,6 +238,21 @@ export type Database = {
           whatsapp_number: string
           whatsapp_payment_message: string
           years_in_business: string
+          navbar_sticky: boolean
+          navbar_contact_btn_label: string
+          footer_email: string
+          footer_facebook_url: string
+          footer_instagram_url: string
+          footer_twitter_url: string
+          footer_linkedin_url: string
+          cta_bg_image_url: string
+          cta_button_text: string
+          cta_wa_button_text: string
+          seo_meta_title: string
+          seo_meta_description: string
+          seo_meta_keywords: string
+          seo_og_image_url: string
+          seo_favicon_url: string
         }
         Insert: {
           about_text?: string
@@ -221,6 +292,21 @@ export type Database = {
           whatsapp_number?: string
           whatsapp_payment_message?: string
           years_in_business?: string
+          navbar_sticky?: boolean
+          navbar_contact_btn_label?: string
+          footer_email?: string
+          footer_facebook_url?: string
+          footer_instagram_url?: string
+          footer_twitter_url?: string
+          footer_linkedin_url?: string
+          cta_bg_image_url?: string
+          cta_button_text?: string
+          cta_wa_button_text?: string
+          seo_meta_title?: string
+          seo_meta_description?: string
+          seo_meta_keywords?: string
+          seo_og_image_url?: string
+          seo_favicon_url?: string
         }
         Update: {
           about_text?: string
@@ -260,6 +346,21 @@ export type Database = {
           whatsapp_number?: string
           whatsapp_payment_message?: string
           years_in_business?: string
+          navbar_sticky?: boolean
+          navbar_contact_btn_label?: string
+          footer_email?: string
+          footer_facebook_url?: string
+          footer_instagram_url?: string
+          footer_twitter_url?: string
+          footer_linkedin_url?: string
+          cta_bg_image_url?: string
+          cta_button_text?: string
+          cta_wa_button_text?: string
+          seo_meta_title?: string
+          seo_meta_description?: string
+          seo_meta_keywords?: string
+          seo_og_image_url?: string
+          seo_favicon_url?: string
         }
         Relationships: []
       }

@@ -4,18 +4,24 @@ import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { 
   LogOut, Home, ArrowLeft, BarChart3, Sparkles, Settings as SettingsIcon, 
-  Wrench, Car as CarIcon, MessageSquare, CreditCard, MessageCircle, MapPin, Loader2, Menu, X, Shield, User
+  Wrench, Car as CarIcon, MessageSquare, CreditCard, MessageCircle, MapPin, Loader2, Menu, X, Shield, User,
+  Calendar, Layers, Search, Image
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useQuery } from "@tanstack/react-query";
 
 const TABS = [
   { id: "overview", path: "/admin", label: "Overview / Stats", icon: BarChart3, exact: true },
+  { id: "bookings", path: "/admin/bookings", label: "Bookings", icon: Calendar },
   { id: "branding", path: "/admin/branding", label: "Branding & Hero", icon: Sparkles },
-  { id: "content", path: "/admin/content", label: "Section Copy", icon: SettingsIcon },
   { id: "services", path: "/admin/services", label: "Services CMS", icon: Wrench },
   { id: "cars", path: "/admin/cars", label: "Fleet / Cars", icon: CarIcon },
   { id: "reviews", path: "/admin/reviews", label: "Reviews CMS", icon: MessageSquare },
+  { id: "cta", path: "/admin/cta", label: "CTA Section", icon: Layers },
+  { id: "navbar", path: "/admin/navbar", label: "Navbar Settings", icon: Menu },
+  { id: "footer", path: "/admin/footer", label: "Footer Settings", icon: SettingsIcon },
+  { id: "seo", path: "/admin/seo", label: "SEO Settings", icon: Search },
+  { id: "media", path: "/admin/media", label: "Media Library", icon: Image },
   { id: "payment", path: "/admin/payment", label: "Payment & UPI", icon: CreditCard },
   { id: "whatsapp", path: "/admin/whatsapp", label: "WhatsApp Copy", icon: MessageCircle },
   { id: "contact", path: "/admin/contact", label: "Contact & Maps", icon: MapPin },

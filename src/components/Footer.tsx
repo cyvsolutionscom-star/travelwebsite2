@@ -1,4 +1,4 @@
-import { MapPin, Clock, MessageCircle } from "lucide-react";
+import { MapPin, Clock, MessageCircle, Facebook, Instagram, Twitter, Linkedin, Mail } from "lucide-react";
 import { useSiteSettings } from "@/hooks/useSiteData";
 
 const Footer = () => {
@@ -22,6 +22,33 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed mb-4">{data?.about_text}</p>
+            <div className="flex flex-wrap gap-2.5 mb-6">
+              {data?.footer_facebook_url && data.footer_facebook_url !== "#" && (
+                <a href={data.footer_facebook_url} target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-secondary border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 transition-all hover:scale-105" title="Facebook">
+                  <Facebook className="w-4 h-4" />
+                </a>
+              )}
+              {data?.footer_instagram_url && data.footer_instagram_url !== "#" && (
+                <a href={data.footer_instagram_url} target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-secondary border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 transition-all hover:scale-105" title="Instagram">
+                  <Instagram className="w-4 h-4" />
+                </a>
+              )}
+              {data?.footer_twitter_url && data.footer_twitter_url !== "#" && (
+                <a href={data.footer_twitter_url} target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-secondary border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 transition-all hover:scale-105" title="Twitter / X">
+                  <Twitter className="w-4 h-4" />
+                </a>
+              )}
+              {data?.footer_linkedin_url && data.footer_linkedin_url !== "#" && (
+                <a href={data.footer_linkedin_url} target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-secondary border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 transition-all hover:scale-105" title="LinkedIn">
+                  <Linkedin className="w-4 h-4" />
+                </a>
+              )}
+              {data?.footer_email && (
+                <a href={`mailto:${data.footer_email}`} className="w-8 h-8 rounded-full bg-secondary border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 transition-all hover:scale-105" title="Email">
+                  <Mail className="w-4 h-4" />
+                </a>
+              )}
+            </div>
             {data?.map_embed_url && (
               <div className="rounded-2xl overflow-hidden border border-border/60 aspect-video">
                 <iframe src={data.map_embed_url} title="Location map" className="w-full h-full" loading="lazy" referrerPolicy="no-referrer-when-downgrade" />

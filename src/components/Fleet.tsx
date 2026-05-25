@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Users, Fuel, Settings, MessageCircle, Phone } from "lucide-react";
 import { useCars, useSiteSettings, type Car } from "@/hooks/useSiteData";
+import { BookingModal } from "@/components/BookingModal";
 
 type Cat = "all" | "suv" | "sedan" | "mpv";
 
@@ -13,6 +14,9 @@ const filters: { id: Cat; label: string }[] = [
 
 const Fleet = () => {
   const [active, setActive] = useState<Cat>("all");
+  const [selectedCar, setSelectedCar] = useState<Car | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  
   const { data: cars = [], isLoading } = useCars();
   const { data: settings } = useSiteSettings();
   const wa = settings?.whatsapp_number ?? "919492456488";
@@ -20,13 +24,9 @@ const Fleet = () => {
 
   const visible = active === "all" ? cars : cars.filter((c: Car) => c.category === active);
 
-  const bookViaWhatsApp = (car: Car) => {
-    const template = settings?.whatsapp_booking_template
-      ?? "Hi! I want to book the {car} (₹{price}/day). Please share availability.";
-    const msg = encodeURIComponent(
-      template.replace(/\{car\}/g, car.name).replace(/\{price\}/g, String(car.price_per_day))
-    );
-    window.open(`https://wa.me/${wa}?text=${msg}`, "_blank", "noopener,noreferrer");
+  const handleBookClick = (car: Car) => {
+    setSelectedCar(car);
+    setModalOpen(true);
   };
 
   return (
@@ -100,7 +100,7 @@ const Fleet = () => {
                   </div>
 
                   <button
-                    onClick={() => bookViaWhatsApp(car)}
+                    onClick={() => handleBookClick(car)}
                     className="w-full inline-flex items-center justify-center gap-2 h-11 rounded-full bg-[#25D366] text-white font-semibold text-sm hover:brightness-110 transition-all hover:scale-[1.02]"
                   >
                     <MessageCircle className="w-4 h-4" /> Book on WhatsApp
@@ -117,8 +117,17 @@ const Fleet = () => {
           </div>
         )}
       </div>
+
+      <BookingModal
+        car={selectedCar}
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        whatsappNumber={wa}
+        bookingTemplate={settings?.whatsapp_booking_template ?? "Hi! I want to book the {car} (₹{price}/day). Please share availability."}
+      />
     </section>
   );
 };
 
 export default Fleet;
+

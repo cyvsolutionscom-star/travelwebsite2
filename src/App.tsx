@@ -9,11 +9,17 @@ import NotFound from "./pages/NotFound.tsx";
 import Auth from "./pages/Auth.tsx";
 import AdminLayout from "./pages/admin/AdminLayout.tsx";
 import Overview from "./pages/admin/Overview.tsx";
+import BookingsEditor from "./pages/admin/BookingsEditor.tsx";
 import BrandingEditor from "./pages/admin/BrandingEditor.tsx";
 import ContentEditor from "./pages/admin/ContentEditor.tsx";
 import ServicesEditor from "./pages/admin/ServicesEditor.tsx";
 import CarsEditor from "./pages/admin/CarsEditor.tsx";
 import ReviewsEditor from "./pages/admin/ReviewsEditor.tsx";
+import CTAEditor from "./pages/admin/CTAEditor.tsx";
+import NavbarEditor from "./pages/admin/NavbarEditor.tsx";
+import FooterEditor from "./pages/admin/FooterEditor.tsx";
+import SEOEditor from "./pages/admin/SEOEditor.tsx";
+import MediaLibrary from "./pages/admin/MediaLibrary.tsx";
 import PaymentEditor from "./pages/admin/PaymentEditor.tsx";
 import WhatsAppEditor from "./pages/admin/WhatsAppEditor.tsx";
 import ContactEditor from "./pages/admin/ContactEditor.tsx";
@@ -34,11 +40,17 @@ const App = () => (
             
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<Overview />} />
+              <Route path="bookings" element={<BookingsEditor />} />
               <Route path="branding" element={<BrandingEditor />} />
               <Route path="content" element={<ContentEditor />} />
               <Route path="services" element={<ServicesEditor />} />
               <Route path="cars" element={<CarsEditor />} />
               <Route path="reviews" element={<ReviewsEditor />} />
+              <Route path="cta" element={<CTAEditor />} />
+              <Route path="navbar" element={<NavbarEditor />} />
+              <Route path="footer" element={<FooterEditor />} />
+              <Route path="seo" element={<SEOEditor />} />
+              <Route path="media" element={<MediaLibrary />} />
               <Route path="payment" element={<PaymentEditor />} />
               <Route path="whatsapp" element={<WhatsAppEditor />} />
               <Route path="contact" element={<ContactEditor />} />

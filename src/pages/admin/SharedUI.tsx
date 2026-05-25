@@ -43,13 +43,13 @@ export const Section = ({ title, description, action, children }: { title: strin
   </div>
 );
 
-export const Field = ({ label, value, onChange, multiline, type = "text", compact }: { label: string; value: string; onChange: (v: string) => void; multiline?: boolean; type?: string; compact?: boolean }) => (
+export const Field = ({ label, value, onChange, multiline, type = "text", compact, placeholder }: { label: string; value: string; onChange: (v: string) => void; multiline?: boolean; type?: string; compact?: boolean; placeholder?: string }) => (
   <div>
     <label className={`block font-medium mb-1 ${compact ? "text-xs text-muted-foreground" : "text-sm"}`}>{label}</label>
     {multiline ? (
-      <textarea value={value} onChange={(e) => onChange(e.target.value)} rows={3} className="w-full px-3 py-2 rounded-xl bg-background border border-border focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm" />
+      <textarea value={value} onChange={(e) => onChange(e.target.value)} rows={3} placeholder={placeholder} className="w-full px-3 py-2 rounded-xl bg-background border border-border focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm" />
     ) : (
-      <input type={type} value={value} onChange={(e) => onChange(e.target.value)} className="w-full h-10 px-3 rounded-xl bg-background border border-border focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm" />
+      <input type={type} value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} className="w-full h-10 px-3 rounded-xl bg-background border border-border focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm" />
     )}
   </div>
 );

@@ -39,8 +39,9 @@ const Navbar = () => {
     <>
       <header
         className={cn(
-          "fixed top-0 inset-x-0 z-50 transition-all duration-500",
-          scrolled || open ? "bg-background/85 backdrop-blur-xl border-b border-border/60 py-3" : "py-5",
+          "inset-x-0 z-50 transition-all duration-500",
+          (data?.navbar_sticky ?? true) ? "fixed top-0" : "absolute top-0",
+          scrolled || open || !(data?.navbar_sticky ?? true) ? "bg-background/85 backdrop-blur-xl border-b border-border/60 py-3" : "py-5",
         )}
       >
         <div className="container flex items-center justify-between gap-4">
@@ -88,7 +89,7 @@ const Navbar = () => {
               <MessageCircle className="w-4 h-4" /> WhatsApp
             </a>
             <a href={`tel:${phone}`} className="hidden sm:inline-flex items-center gap-2 px-5 h-10 rounded-full bg-gradient-primary text-primary-foreground text-sm font-semibold btn-glow hover:scale-105 transition-transform">
-              <Phone className="w-4 h-4" /> Call
+              <Phone className="w-4 h-4" /> {data?.navbar_contact_btn_label ?? "Call"}
             </a>
 
             {/* Mobile menu toggle */}
@@ -135,7 +136,7 @@ const Navbar = () => {
             )}
             <div className="grid grid-cols-2 gap-2">
               <a href={`tel:${phone}`} className="flex items-center justify-center gap-2 h-11 rounded-2xl bg-gradient-primary text-primary-foreground font-semibold btn-glow">
-                <Phone className="w-4 h-4" /> Call
+                <Phone className="w-4 h-4" /> {data?.navbar_contact_btn_label ?? "Call"}
               </a>
               <a href={`https://wa.me/${wa}?text=${waMsg}`} className="flex items-center justify-center gap-2 h-11 rounded-2xl bg-secondary border border-border font-semibold">
                 <MessageCircle className="w-4 h-4" /> WhatsApp
