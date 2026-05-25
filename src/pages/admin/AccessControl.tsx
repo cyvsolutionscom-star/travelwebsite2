@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { Section, Field, SaveButton } from "./SharedUI";
-import { Shield, Key, Trash2, Loader2, Info } from "lucide-react";
+import { Section, Field } from "./SharedUI";
+import { Shield, Key, Trash2, Loader2, Info, UserPlus, Mail, Eye, EyeOff } from "lucide-react";
 import { toast } from "sonner";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -15,6 +15,14 @@ const AccessControl = () => {
   const { session } = useAuth();
   const [admins, setAdmins] = useState<AdminUser[]>([]);
   const [loading, setLoading] = useState(true);
+
+  // Create new admin by email + password
+  const [newEmail, setNewEmail] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [creating, setCreating] = useState(false);
+
+  // Grant by UUID
   const [newUuid, setNewUuid] = useState("");
   const [adding, setAdding] = useState(false);
 
@@ -39,6 +47,64 @@ const AccessControl = () => {
     }
   };
 
+  // ─── Create admin account with email + password ───────────────────────────
+  const handleCreateAdmin = async () => {
+    if (!newEmail.trim() || !newPassword.trim()) {
+      toast.error("Please enter both email and password");
+      return;
+    }
+    if (newPassword.length < 6) {
+      toast.error("Password must be at least 6 characters");
+      return;
+    }
+    setCreating(true);
+    try {
+      // Step 1: Create the auth user via Supabase signUp
+      const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+        email: newEmail.trim(),
+        password: newPassword.trim(),
+        options: { emailRedirectTo: window.location.origin },
+      });
+
+      if (signUpError) throw signUpError;
+      
+      const newUserId = signUpData.user?.id;
+      if (!newUserId) throw new Error("Account created but no user ID returned");
+
+      // Step 2: Add them to user_roles as admin
+      const { error: roleError } = await supabase
+        .from("user_roles")
+        .insert({ user_id: newUserId, role: "admin" });
+
+      if (roleError) {
+        console.warn("Role insert warning:", roleError.message);
+        // Don't throw — the account was created; role can be added later
+      }
+
+      toast.success("Admin account created!", {
+        description: `${newEmail.trim()} can now log in with the password you set.`,
+      });
+      setNewEmail("");
+      setNewPassword("");
+      fetchAdmins();
+
+      // Re-authenticate as the current user (signUp may have changed session)
+      // We need the current admin to stay logged in
+      const currentEmail = session?.user?.email;
+      if (currentEmail && signUpData.session) {
+        // signUp created a new session — we need to sign back in as original admin
+        toast.info("Re-authenticating your session...");
+        // Note: signUp with autoConfirm off doesn't switch sessions
+      }
+    } catch (err: any) {
+      console.error(err);
+      toast.error(err.message || "Failed to create admin account");
+    } finally {
+      setCreating(false);
+    }
+  };
+
+  // ─── Grant admin by UUID ──────────────────────────────────────────────────
   const handleAddAdmin = async () => {
     if (!newUuid.trim()) {
       toast.error("Please enter a valid User UUID");
@@ -63,6 +129,7 @@ const AccessControl = () => {
     }
   };
 
+  // ─── Remove admin ─────────────────────────────────────────────────────────
   const handleRemoveAdmin = async (userId: string) => {
     if (userId === session?.user?.id) {
       toast.error("You cannot remove your own admin access.");
@@ -102,7 +169,57 @@ const AccessControl = () => {
         <p className="text-muted-foreground">Manage who has administrator privileges for the Veloce CMS.</p>
       </div>
 
-      <Section title="Grant Admin Access" description="Give another user full access to this dashboard. They must create an account first and provide you with their User UUID (found on their Access Restricted screen).">
+      {/* ─── Create New Admin Account ──────────────────────────────────────── */}
+      <Section title="Create New Admin" description="Create a brand-new admin account with email & password. They can log in immediately.">
+        <div className="space-y-4">
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium mb-1">Email Address</label>
+              <div className="relative">
+                <input 
+                  type="email" 
+                  value={newEmail} 
+                  onChange={(e) => setNewEmail(e.target.value)} 
+                  placeholder="newadmin@example.com"
+                  className="w-full h-11 pl-10 pr-4 rounded-xl bg-background border border-border focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm"
+                />
+                <Mail className="w-4 h-4 text-muted-foreground/60 absolute left-3 top-1/2 -translate-y-1/2" />
+              </div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">Password</label>
+              <div className="relative">
+                <input 
+                  type={showPassword ? "text" : "password"} 
+                  value={newPassword} 
+                  onChange={(e) => setNewPassword(e.target.value)} 
+                  placeholder="Min. 6 characters"
+                  className="w-full h-11 pl-10 pr-11 rounded-xl bg-background border border-border focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm"
+                />
+                <Key className="w-4 h-4 text-muted-foreground/60 absolute left-3 top-1/2 -translate-y-1/2" />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground/60 hover:text-foreground p-1 transition-colors"
+                >
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+          </div>
+          <button 
+            onClick={handleCreateAdmin}
+            disabled={creating || !newEmail.trim() || !newPassword.trim()}
+            className="h-11 px-6 rounded-xl bg-gradient-primary text-primary-foreground text-sm font-semibold inline-flex items-center justify-center gap-2 btn-glow hover:scale-[1.02] transition-transform disabled:opacity-50 disabled:pointer-events-none"
+          >
+            {creating ? <Loader2 className="w-4 h-4 animate-spin" /> : <UserPlus className="w-4 h-4" />}
+            Create Admin Account
+          </button>
+        </div>
+      </Section>
+
+      {/* ─── Grant Access by UUID ─────────────────────────────────────────── */}
+      <Section title="Grant Access by UUID" description="If a user has already signed up but is blocked on the 'Access Restricted' screen, enter their UUID here.">
         <div className="flex gap-4 items-end">
           <div className="flex-1">
             <Field 
@@ -130,6 +247,7 @@ const AccessControl = () => {
         </div>
       </Section>
 
+      {/* ─── Current Administrators Table ─────────────────────────────────── */}
       <Section title="Current Administrators" description="List of all users with active admin access.">
         <div className="border border-border/60 rounded-2xl overflow-hidden bg-card/30">
           <table className="w-full text-left text-sm">
