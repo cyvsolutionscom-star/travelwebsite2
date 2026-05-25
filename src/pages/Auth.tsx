@@ -4,7 +4,7 @@ import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
-import { ArrowLeft, Shield, Eye, EyeOff, Key, Mail } from "lucide-react";
+import { ArrowLeft, Shield, Eye, EyeOff, Key, Mail, Loader2 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 
 const schema = z.object({
@@ -35,6 +35,19 @@ const Auth = () => {
       navigate("/admin", { replace: true });
     }
   }, [session, authLoading, navigate]);
+
+  // Show a full-screen spinner while auth is being checked
+  // This prevents the brief blank screen flash
+  if (authLoading) {
+    return (
+      <div className="min-h-screen w-full flex items-center justify-center bg-background">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-14 h-14 rounded-full border-4 border-primary/20 border-t-primary animate-spin" />
+          <p className="text-sm font-semibold tracking-wider text-muted-foreground animate-pulse">Verifying session...</p>
+        </div>
+      </div>
+    );
+  }
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
