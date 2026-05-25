@@ -102,14 +102,14 @@ const Auth = () => {
             </div>
             <div>
               <h1 className="font-display font-black text-2xl tracking-tight text-foreground">{settings?.admin_login_title || "Veloce Gateway"}</h1>
-              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mt-0.5">Control Center Access</p>
+              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mt-0.5">{settings?.admin_login_subtitle || "Control Center Access"}</p>
             </div>
           </div>
 
           <form onSubmit={onSubmit} className="space-y-5">
             {/* Email Field with custom icon */}
             <div>
-              <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2 block">Administrative Email</label>
+              <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2 block">{settings?.admin_email_label || "Administrative Email"}</label>
               <div className="relative">
                 <input 
                   type="email" 

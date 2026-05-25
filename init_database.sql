@@ -47,6 +47,10 @@ CREATE TABLE public.site_settings (
   about_text text NOT NULL DEFAULT 'Vijayawada''s trusted self-drive car rental since 2017. Well-maintained vehicles, transparent pricing, and 24/7 availability. Located at Benz Circle.',
   admin_portal_name text NOT NULL DEFAULT 'Veloce CMS',
   admin_login_title text NOT NULL DEFAULT 'Veloce Gateway',
+  admin_console_subtitle text NOT NULL DEFAULT 'Admin Console',
+  admin_login_subtitle text NOT NULL DEFAULT 'Control Center Access',
+  admin_email_label text NOT NULL DEFAULT 'Administrative Email',
+  admin_logo_text text NOT NULL DEFAULT 'V',
   updated_at timestamptz NOT NULL DEFAULT now()
 );
 ALTER TABLE public.site_settings ENABLE ROW LEVEL SECURITY;

@@ -94,10 +94,10 @@ const AdminLayout = () => {
       {/* Mobile Header Bar */}
       <header className="md:hidden sticky top-0 z-40 bg-background/55 backdrop-blur-xl border-b border-border/60 h-16 flex items-center justify-between px-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-primary flex items-center justify-center text-primary-foreground font-display font-extrabold text-lg shadow-glow">V</div>
+          <div className="w-10 h-10 rounded-2xl bg-gradient-primary flex items-center justify-center text-primary-foreground font-display font-extrabold text-lg shadow-glow">{settings?.admin_logo_text || "V"}</div>
           <div>
             <div className="font-display font-bold text-sm leading-tight text-foreground">{settings?.admin_portal_name || "Veloce CMS"}</div>
-            <div className="text-[9px] uppercase tracking-widest text-primary font-bold">Admin Console</div>
+            <div className="text-[9px] uppercase tracking-widest text-primary font-bold">{settings?.admin_console_subtitle || "Admin Console"}</div>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -132,10 +132,10 @@ const AdminLayout = () => {
         <div>
           <div className="hidden md:flex p-6 border-b border-border/50 items-center justify-between">
             <div className="flex items-center gap-3 min-w-0">
-              <div className="w-11 h-11 rounded-2xl bg-gradient-primary flex items-center justify-center font-display font-extrabold text-primary-foreground text-xl shadow-glow">V</div>
+              <div className="w-11 h-11 rounded-2xl bg-gradient-primary flex items-center justify-center font-display font-extrabold text-primary-foreground text-xl shadow-glow">{settings?.admin_logo_text || "V"}</div>
               <div className="min-w-0">
                 <div className="font-display font-bold text-sm leading-tight text-foreground">{settings?.admin_portal_name || "Veloce CMS"}</div>
-                <div className="text-[9px] uppercase tracking-widest text-primary font-bold">Admin Console</div>
+                <div className="text-[9px] uppercase tracking-widest text-primary font-bold">{settings?.admin_console_subtitle || "Admin Console"}</div>
               </div>
             </div>
           </div>

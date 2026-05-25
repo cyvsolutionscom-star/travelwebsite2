@@ -148,6 +148,10 @@ export type Database = {
           about_text: string
           admin_portal_name: string
           admin_login_title: string
+          admin_console_subtitle: string
+          admin_login_subtitle: string
+          admin_email_label: string
+          admin_logo_text: string
           address: string
           business_name: string
           cta_subtitle: string
@@ -183,6 +187,10 @@ export type Database = {
           about_text?: string
           admin_portal_name?: string
           admin_login_title?: string
+          admin_console_subtitle?: string
+          admin_login_subtitle?: string
+          admin_email_label?: string
+          admin_logo_text?: string
           address?: string
           business_name?: string
           cta_subtitle?: string
@@ -218,6 +226,10 @@ export type Database = {
           about_text?: string
           admin_portal_name?: string
           admin_login_title?: string
+          admin_console_subtitle?: string
+          admin_login_subtitle?: string
+          admin_email_label?: string
+          admin_logo_text?: string
           address?: string
           business_name?: string
           cta_subtitle?: string
