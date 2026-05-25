@@ -24,6 +24,7 @@ import PaymentEditor from "./pages/admin/PaymentEditor.tsx";
 import WhatsAppEditor from "./pages/admin/WhatsAppEditor.tsx";
 import ContactEditor from "./pages/admin/ContactEditor.tsx";
 import AccessControl from "./pages/admin/AccessControl.tsx";
+import PortalSettings from "./pages/admin/PortalSettings.tsx";
 
 const queryClient = new QueryClient();
 
@@ -55,6 +56,7 @@ const App = () => (
               <Route path="whatsapp" element={<WhatsAppEditor />} />
               <Route path="contact" element={<ContactEditor />} />
               <Route path="access" element={<AccessControl />} />
+              <Route path="settings" element={<PortalSettings />} />
             </Route>
 
             <Route path="*" element={<NotFound />} />

@@ -32,6 +32,27 @@ export type SiteSettings = {
   whatsapp_default_message: string;
   whatsapp_booking_template: string;
   whatsapp_payment_message: string;
+  admin_portal_name?: string;
+  admin_login_title?: string;
+  admin_console_subtitle?: string;
+  admin_login_subtitle?: string;
+  admin_email_label?: string;
+  admin_logo_text?: string;
+  navbar_sticky?: boolean;
+  navbar_contact_btn_label?: string;
+  footer_email?: string;
+  footer_facebook_url?: string;
+  footer_instagram_url?: string;
+  footer_twitter_url?: string;
+  footer_linkedin_url?: string;
+  cta_bg_image_url?: string;
+  cta_button_text?: string;
+  cta_wa_button_text?: string;
+  seo_meta_title?: string;
+  seo_meta_description?: string;
+  seo_meta_keywords?: string;
+  seo_og_image_url?: string;
+  seo_favicon_url?: string;
 };
 
 export const useSiteSettings = () =>

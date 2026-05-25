@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { 
   LogOut, Home, ArrowLeft, BarChart3, Sparkles, Settings as SettingsIcon, 
   Wrench, Car as CarIcon, MessageSquare, CreditCard, MessageCircle, MapPin, Loader2, Menu, X, Shield, User,
-  Calendar, Layers, Search, Image
+  Calendar, Layers, Search, Image, Settings2
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useQuery } from "@tanstack/react-query";
@@ -26,6 +26,7 @@ const TABS = [
   { id: "whatsapp", path: "/admin/whatsapp", label: "WhatsApp Copy", icon: MessageCircle },
   { id: "contact", path: "/admin/contact", label: "Contact & Maps", icon: MapPin },
   { id: "access", path: "/admin/access", label: "Access Control", icon: Shield },
+  { id: "settings", path: "/admin/settings", label: "Admin Settings", icon: Settings2 },
 ];
 
 const AdminLayout = () => {
