@@ -75,15 +75,9 @@ const Navbar = () => {
 
             {/* Desktop admin/auth */}
             {session ? (
-              isAdmin ? (
-                <Link to="/admin" className="hidden sm:inline-flex items-center gap-2 px-4 h-10 rounded-full bg-secondary border border-border text-sm font-semibold hover:bg-secondary/70">
-                  <Shield className="w-4 h-4" /> Admin
-                </Link>
-              ) : (
-                <button onClick={() => supabase.auth.signOut()} className="hidden sm:inline-flex items-center gap-2 px-4 h-10 rounded-full bg-secondary border border-border text-sm font-semibold hover:bg-secondary/70">
-                  <LogOut className="w-4 h-4" />
-                </button>
-              )
+              <Link to="/admin" className="hidden sm:inline-flex items-center gap-2 px-4 h-10 rounded-full bg-secondary border border-border text-sm font-semibold hover:bg-secondary/70">
+                <Shield className="w-4 h-4" /> Admin
+              </Link>
             ) : (
               <Link to="/auth" aria-label="Admin login" className="hidden sm:inline-flex items-center gap-2 px-4 h-10 rounded-full bg-secondary border border-border text-sm font-semibold hover:bg-secondary/70">
                 <Shield className="w-4 h-4" /> Admin
@@ -130,14 +124,10 @@ const Navbar = () => {
             ))}
           </nav>
           <div className="border-t border-border p-3 space-y-2">
-            {session && isAdmin ? (
+            {session ? (
               <Link to="/admin" onClick={() => setOpen(false)} className="flex items-center justify-center gap-2 w-full h-11 rounded-2xl bg-gradient-primary text-primary-foreground font-semibold btn-glow">
                 <Shield className="w-4 h-4" /> Open Admin Dashboard
               </Link>
-            ) : session ? (
-              <button onClick={() => { supabase.auth.signOut(); setOpen(false); }} className="flex items-center justify-center gap-2 w-full h-11 rounded-2xl bg-secondary border border-border font-semibold">
-                <LogOut className="w-4 h-4" /> Sign out
-              </button>
             ) : (
               <Link to="/auth" onClick={() => setOpen(false)} className="flex items-center justify-center gap-2 w-full h-11 rounded-2xl bg-secondary border border-border font-semibold">
                 <LogIn className="w-4 h-4" /> Admin Login

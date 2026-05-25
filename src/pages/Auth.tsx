@@ -20,8 +20,8 @@ const Auth = () => {
   const { session, isAdmin, loading: authLoading } = useAuth();
 
   useEffect(() => {
-    if (!authLoading && session) navigate(isAdmin ? "/admin" : "/", { replace: true });
-  }, [session, isAdmin, authLoading, navigate]);
+    if (!authLoading && session) navigate("/admin", { replace: true });
+  }, [session, authLoading, navigate]);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
