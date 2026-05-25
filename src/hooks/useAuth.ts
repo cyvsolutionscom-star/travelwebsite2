@@ -8,16 +8,15 @@ export const useAuth = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, s) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, s) => {
       setSession(s);
       if (s?.user) {
-        setTimeout(async () => {
-          const { data } = await supabase.from("user_roles").select("role").eq("user_id", s.user.id).eq("role", "admin").maybeSingle();
-          setIsAdmin(!!data);
-        }, 0);
+        const { data } = await supabase.from("user_roles").select("role").eq("user_id", s.user.id).eq("role", "admin").maybeSingle();
+        setIsAdmin(!!data);
       } else {
         setIsAdmin(false);
       }
+      setLoading(false);
     });
 
     supabase.auth.getSession().then(async ({ data: { session: s } }) => {
@@ -25,8 +24,10 @@ export const useAuth = () => {
       if (s?.user) {
         const { data } = await supabase.from("user_roles").select("role").eq("user_id", s.user.id).eq("role", "admin").maybeSingle();
         setIsAdmin(!!data);
+        setLoading(false);
+      } else {
+        setLoading(false);
       }
-      setLoading(false);
     });
 
     return () => subscription.unsubscribe();
