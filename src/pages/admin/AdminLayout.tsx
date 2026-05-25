@@ -19,6 +19,7 @@ const TABS = [
   { id: "payment", path: "/admin/payment", label: "Payment & UPI", icon: CreditCard },
   { id: "whatsapp", path: "/admin/whatsapp", label: "WhatsApp Copy", icon: MessageCircle },
   { id: "contact", path: "/admin/contact", label: "Contact & Maps", icon: MapPin },
+  { id: "access", path: "/admin/access", label: "Access Control", icon: Shield },
 ];
 
 const AdminLayout = () => {
